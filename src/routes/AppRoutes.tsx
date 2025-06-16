@@ -162,16 +162,33 @@ const AppRoutes: React.FC = () => {
     loadTokensAndChain();
   }, [isAuthenticated, currentNetwork, wagmiChainId]);
 
-  // Sync wagmi chain changes back to context
+  // Only update wagmi if context changes and is different from wagmi
   useEffect(() => {
-    if (isAuthenticated && wagmiChainId && currentNetwork !== wagmiChainId.toString()) {
+    if (
+      isAuthenticated &&
+      currentNetwork &&
+      wagmiChainId &&
+      Number(currentNetwork) !== wagmiChainId
+    ) {
+      console.log('Switching wagmi chain from', wagmiChainId, 'to', currentNetwork);
+      switchChain({ chainId: Number(currentNetwork) });
+    }
+    // Only depend on currentNetwork and isAuthenticated
+  }, [isAuthenticated, currentNetwork]);
+
+  // Only update context if wagmi changes and is different from context
+  useEffect(() => {
+    if (
+      isAuthenticated &&
+      wagmiChainId &&
+      currentNetwork !== wagmiChainId.toString()
+    ) {
       console.log('Syncing wagmi chain change to context:', wagmiChainId);
       setCurrentNetwork(wagmiChainId.toString());
       setChainId(wagmiChainId);
-      
-      // Save to AsyncStorage
       AsyncStorage.setItem("chainId", wagmiChainId.toString());
     }
+    // Only depend on wagmiChainId and isAuthenticated
   }, [wagmiChainId, isAuthenticated]);
 
   // Show loading while checking wallet status
