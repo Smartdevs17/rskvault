@@ -1,7 +1,7 @@
 // src/utils/crypto.ts
 import * as Crypto from 'expo-crypto';
 import * as SecureStore from 'expo-secure-store';
-import { AES, enc } from 'react-native-crypto-js';
+import CryptoJS from 'react-native-crypto-js';
 
 const SALT_KEY = 'rskvault-salt';
 
@@ -39,8 +39,8 @@ export const encryptData = async (data: any, password: string): Promise<string> 
     const key = await deriveKey(password, salt);
     
     // Using react-native-crypto-js for actual encryption
-    const iv = enc.Hex.parse(Buffer.from(await Crypto.getRandomBytesAsync(12)).toString('hex'));
-    const encrypted = AES.encrypt(JSON.stringify(data), key, { iv });
+    const iv = CryptoJS.enc.Hex.parse(Buffer.from(await Crypto.getRandomBytesAsync(12)).toString('hex'));
+    const encrypted = CryptoJS.AES.encrypt(JSON.stringify(data), key, { iv });
     
     return JSON.stringify({
       iv: iv.toString(),
@@ -58,8 +58,8 @@ export const decryptData = async (payload: string, password: string): Promise<an
     const { iv, ciphertext, salt } = JSON.parse(payload);
     const key = await deriveKey(password, salt);
     
-    const decrypted = AES.decrypt(ciphertext, key, { iv: enc.Hex.parse(iv) });
-    const decryptedStr = decrypted.toString(enc.Utf8);
+    const decrypted = CryptoJS.AES.decrypt(ciphertext, key, { iv: CryptoJS.enc.Hex.parse(iv) });
+    const decryptedStr = decrypted.toString(CryptoJS.enc.Utf8);
     
     if (!decryptedStr) throw new Error('Decryption failed - possibly wrong password');
     

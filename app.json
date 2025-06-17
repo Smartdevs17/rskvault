@@ -27,6 +27,15 @@
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "rpcUrls": {
+        "rskMainnet": "https://public-node.rsk.co",
+        "rskTestnet": "https://public-node.testnet.rsk.co"
+      },
+      "eas": {
+        "projectId": "2e456fc1-842b-4259-95de-054f61c7c7dd"
+      }
+    }
   }
 }

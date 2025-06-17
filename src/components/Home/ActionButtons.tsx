@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../routes/AppRoutes';
+import { RootStackParamList } from '../../routes/RootstockRoutes';
 
 type ActionButtonsNavigationProp = StackNavigationProp<RootStackParamList>;
 

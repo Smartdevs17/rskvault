@@ -6,7 +6,6 @@ import { useToken } from '../../contexts/Token';
 import { useChainId, useReadContract } from 'wagmi';
 import { erc20Abi } from 'viem';
 import { useAuth } from '../../contexts/AuthContext';
-import { MaterialIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const NewTokenModal = () => {

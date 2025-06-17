@@ -1,12 +1,12 @@
 // src/utils/crypto.ts
 import * as Crypto from 'expo-crypto';
 import * as SecureStore from 'expo-secure-store';
-import { AES, enc, SHA256 } from 'react-native-crypto-js';
+import CryptoJS from 'react-native-crypto-js';
 
 // Encryption/Decryption
 export const encrypt = async (password: string, seedPhrase: string): Promise<string> => {
   try {
-    const encrypted = AES.encrypt(seedPhrase, password).toString();
+    const encrypted = CryptoJS.AES.encrypt(seedPhrase, password).toString();
     return encrypted;
   } catch (error) {
     console.error('Encryption failed:', error);
@@ -16,7 +16,7 @@ export const encrypt = async (password: string, seedPhrase: string): Promise<str
 
 export const decrypt = async (password: string, encrypted: string): Promise<string> => {
   try {
-    const decrypted = AES.decrypt(encrypted, password).toString(enc.Utf8);
+    const decrypted = CryptoJS.AES.decrypt(encrypted, password).toString(CryptoJS.enc.Utf8);
     if (!decrypted) throw new Error('Decryption failed - possibly wrong password');
     return decrypted;
   } catch (error) {
@@ -28,7 +28,7 @@ export const decrypt = async (password: string, encrypted: string): Promise<stri
 // Password Hashing
 export const hashPassword = async (password: string): Promise<string> => {
   try {
-    const hash = SHA256(password).toString();
+    const hash = CryptoJS.SHA256(password).toString();
     return hash;
   } catch (error) {
     console.error('Hashing failed:', error);
