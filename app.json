@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "rskvault",
+    "name": "Rsk Vault",
     "slug": "rskvault",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -14,16 +14,6 @@
     },
     "ios": {
       "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-secure-store"
